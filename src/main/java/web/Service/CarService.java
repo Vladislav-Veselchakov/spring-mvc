@@ -13,7 +13,15 @@ public class CarService {
     @Autowired
     CarDao carDao;
 
-    public List<Car> getCarsByCount(int count) {
-        return (List<Car>) carDao.ListCars().subList(0, count);
+    public List<Car> listCars() {
+        return carDao.listCars();
+    }
+
+    public List<Car> listCarsByCount(int count) {
+        return carDao.listCarsByCount(count);
+    }
+
+    public int getSize() {
+        return carDao.getSize();
     }
 }

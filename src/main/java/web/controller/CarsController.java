@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import web.Service.CarService;
 import web.config.WebConfig;
 import web.dao.CarDao;
@@ -21,14 +22,16 @@ public class CarsController {
     CarService service;
 
     @GetMapping(value = "/cars")
-    public String printWelcomeCars(ModelMap model) {
-        List<String> messages = new ArrayList<>();
+    public String printWelcomeCars(@RequestParam(name = "count", required = false) Integer count, ModelMap model) {
+        List<Car> lstCars = null;
+        if(count == null) {
+            lstCars = service.listCars();
+        } else if(count >= service.getSize() || count < 0) {
+            lstCars = service.listCars();
+        } else {
+            lstCars = service.listCarsByCount(count);
+        }
 
-
-        List<Car> lstCars = service.getCarsByCount(3);
-//        messages.add(lstCars.get(0).getModel());
-//        messages.add(lstCars.get(1).getModel());
-//        messages.add("1.0 version by sep'21 ");
         model.addAttribute("cars", lstCars);
         return "cars";
     }
