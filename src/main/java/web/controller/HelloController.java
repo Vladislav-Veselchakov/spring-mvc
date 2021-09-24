@@ -14,12 +14,13 @@ public class HelloController {
 
 	@GetMapping(value = "/")
 	public String printWelcome(ModelMap model) {
-		List<String> messages = new ArrayList<>();
-		messages.add("Hello!");
-		messages.add("I'm Spring MVC application ----");
-		messages.add("5.2.0 version by sep'3229 ");
-		model.addAttribute("messages", messages);
-		return "index";
+		return "redirect:cars?count=-1";
+//		List<String> messages = new ArrayList<>();
+//		messages.add("Hello!");
+//		messages.add("I'm Spring MVC application ----");
+//		messages.add("5.2.0 version by sep'3229 ");
+//		model.addAttribute("messages", messages);
+//		return "index";
 	}
 
 // url: http://localhost:8080/manager/html
